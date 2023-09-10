@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const communitySchema = new mongoose.Schema({
 	id: { type: String, required: true },
