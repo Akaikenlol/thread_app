@@ -37,7 +37,7 @@ interface Props {
 function PostThread({ userId }: { userId: string }) {
 	const router = useRouter();
 	const pathname = usePathname();
-	const organization = useOrganization();
+	const { organization } = useOrganization();
 
 	const form = useForm({
 		resolver: zodResolver(ThreadValidation),

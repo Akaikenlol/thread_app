@@ -2,6 +2,7 @@ import { fetchUserPosts } from "@/lib/actions/user.actions";
 import { connectToDB } from "@/lib/mongoose";
 import { redirect } from "next/dist/server/api-utils";
 import ThreadCard from "../cards/ThreadCard";
+import { fetchCommunityPosts } from "@/lib/actions/community.actions";
 
 interface Props {
 	currentUserId: string;
@@ -10,8 +11,14 @@ interface Props {
 }
 
 const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
+	let result: any;
+
+	if (accountType === "Community") {
+		result = await fetchCommunityPosts(accountId);
+	} else {
+		result = await fetchUserPosts(accountId);
+	}
 	//TO Do: Fetch Profile Threads
-	let result = await fetchUserPosts(accountId);
 
 	if (!result) redirect("/");
 
